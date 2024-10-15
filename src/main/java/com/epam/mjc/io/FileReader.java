@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 
 public class FileReader {
@@ -24,9 +25,9 @@ public class FileReader {
             }
 
         } catch (FileNotFoundException e) {
-            System.out.println("File not found : " + Arrays.toString(e.getStackTrace()));
+            Logger.getLogger("File not found : " + Arrays.toString(e.getStackTrace()));
         } catch (IOException e) {
-            System.out.println("IOException : "+ Arrays.toString(e.getStackTrace()));
+            Logger.getLogger("IOException : "+ Arrays.toString(e.getStackTrace()));
         }
 
         return new Profile(dataMap.get("Name"),Integer.parseInt(dataMap.get("Age")),dataMap.get("Email"),Long.parseLong(dataMap.get("Phone")));
