@@ -2,14 +2,17 @@ package com.epam.mjc.io;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class FileReader {
-
-    public static Profile getDataFromFile(File file) {
+    FileReader() {
+    }
+    public  Profile getDataFromFile(File file) {
 
         Map<String, String> dataMap = new HashMap<>();
 
@@ -20,19 +23,13 @@ public class FileReader {
                 dataMap.put(keyValue[0].trim(), keyValue[1].trim());
             }
 
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found : " + Arrays.toString(e.getStackTrace()));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("IOException : "+ Arrays.toString(e.getStackTrace()));
         }
 
         return new Profile(dataMap.get("Name"),Integer.parseInt(dataMap.get("Age")),dataMap.get("Email"),Long.parseLong(dataMap.get("Phone")));
     }
 
-    /*public static void main(String[] args) {
-        String directory ="resources";
-        String fileName = "Profile.txt";
-        String absolutePath = directory + File.separator + fileName;
-        File file = new File(absolutePath);
-        Profile profile = getDataFromFile(file);
-        System.out.println(profile);
-    }*/
 }
